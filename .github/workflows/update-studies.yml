@@ -1,0 +1,326 @@
+name: Studien-Update (täglich)
+
+# 03:00 UTC = 05:00 Uhr Berlin (Sommerzeit) bzw. 04:00 Uhr (Winterzeit).
+# GitHub führt geplante Läufe bei hoher Last mit einigen Minuten Verzögerung aus
+# - am 24.08.2026 waren es fast zwei Stunden. Deshalb am selben Tag um eine
+# Stunde vorgezogen: Der Sammelbericht (03:45 UTC, Repo knowledge-hubs) muss
+# nach diesem Lauf kommen, und beide deutlich vor dem Versand um 10:00 Ortszeit.
+on:
+  schedule:
+    # Jedes Portal hat eine EIGENE Minute (59 aus portal.json).
+    # GitHubs Cron ist "best effort": Zur vollen Stunde stehen weltweit die
+    # meisten Zeitplaene an, und unter Last werden Laeufe verspaetet gestartet
+    # oder verworfen. Zwoelf Repos auf derselben Minute sind der unguenstigste
+    # Fall - am 26.08.2026 kam der Lauf zwei Stunden zu spaet, am 27. und
+    # 28.08. gar nicht.
+    - cron: "59 3 * * *"
+    # Netz fuer einen ausgefallenen ersten Lauf: Am 27.08.2026 hat GitHub die
+    # geplanten Laeufe aller dreizehn Repos verschluckt (zeitgleich mit einer
+    # Stoerung der Billing-Dienste), und es kam kein einziger Newsletter.
+    # 05:30 UTC liegt gut vier Stunden vor dem Versand um 10:00 Ortszeit. An
+    # normalen Tagen kostet dieser Lauf nichts: update_studies.py bricht sofort
+    # ab, wenn das Archiv fuer heute schon Studien hat.
+    - cron: "59 5 * * *"
+  workflow_dispatch:        # erlaubt manuelles Starten über die Actions-Oberfläche
+    inputs:
+      nur_studien:
+        description: "Nur Studien holen, keine Kampagne anlegen"
+        type: boolean
+        default: false
+      erzwingen:
+        description: "Auswahl des Tages neu würfeln, auch wenn schon gelaufen"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write           # GITHUB_TOKEN darf index.html zurück ins Repo pushen
+  pages: write              # erlaubt das explizite Anstoßen des Pages-Builds (letzter Schritt)
+
+concurrency:
+  group: studien-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    # 30 statt 15 seit dem 21.10.2026: Platz fuer den zweiten Versuch des
+    # Studienlaufs nach zehn Minuten Pause (siehe unten).
+    timeout-minutes: 30
+    env:
+      # thema.py liegt weiterhin in scripts/, die gemeinsamen Skripte in
+      # scripts/gemeinsam/. Beide muessen importierbar sein: update_studies.py
+      # laeuft drueben und importiert thema von hier, mailchimp_entwurf.py
+      # laeuft hier und importiert torwaechter und sponsoren von drueben.
+      PYTHONPATH: scripts:scripts/gemeinsam
+
+    steps:
+      - name: Repo auschecken
+        uses: actions/checkout@v4
+
+      # Die gemeinsamen Skripte liegen seit dem 04.09.2026 nicht mehr in jedem
+      # Portal, sondern einmal in mvf-portal/hub-scripts. Geholt wird der Zweig
+      # `stabil` - nicht `main`: Auf main wird entwickelt, und ein Commit dort
+      # soll nicht am naechsten Morgen ungeprueft in zwoelf Portalen laufen.
+      # Ausgerollt wird mit `git push origin main:stabil` im Skript-Repo.
+      - name: Gemeinsame Skripte auschecken
+        uses: actions/checkout@v4
+        with:
+          repository: mvf-portal/hub-scripts
+          ref: stabil
+          path: scripts/gemeinsam
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # openpyxl und pypdf kamen am 22.10.2026 mit dem Zulassungsradar dazu:
+      # openpyxl liest die beiden Excel-Tabellen der EMA (Medicines und die
+      # monatliche Antragsliste), pypdf die DiGA-Bekanntmachungen des BfArM.
+      #
+      # **Sie haben einen Tag lang gefehlt, und niemand hat es gemerkt.** Die
+      # beiden Radar-Schritte laufen mit `continue-on-error: true`, damit ein
+      # Aussetzer der EMA nicht das Studien-Update mitreisst - der Lauf meldet
+      # dann Erfolg, obwohl der Radar mit ModuleNotFoundError abgebrochen ist.
+      # Eine fehlende Bibliothek sieht im Ergebnis genauso aus wie ein ruhiger
+      # Tag: Die Seite zeigt weiter die Daten von gestern.
+      - name: Abhängigkeiten installieren
+        run: pip install --quiet "anthropic>=0.40" requests tzdata python-docx openpyxl pypdf
+
+      # Zwei Versuche, zehn Minuten auseinander. Die meisten Ausfaelle sind
+      # Aussetzer - PubMed mit 500, eine leere oder abgeschnittene
+      # Modellantwort -, und zehn Minuten spaeter laeuft derselbe Lauf durch.
+      # Bis zum 21.10.2026 holte das nur die Laufwache auf dem
+      # Redaktionsrechner nach; war der aus, fiel der Hub fuer den Tag aus
+      # (Impfen, 15.10.2026). Scheitert auch der zweite Versuch, scheitert
+      # der Lauf wie bisher, und die Schritte danach entfallen.
+      - name: Studienliste aktualisieren
+        id: studien
+        continue-on-error: true
+        env:
+          # Das Geheimnis heisst in diesem Repository AUGEHUB. Fehlt es, bricht der
+          # Lauf ab - bewusst ohne Rueckfallweg, damit ein falscher Name auffaellt.
+          ANTHROPIC_API_KEY: ${{ secrets.AUGEHUB }}
+          MODEL: claude-haiku-4-5          # günstiges Modell; z. B. claude-sonnet-5 für mehr Qualität
+          # SEARCH_TERM: '...'   # optional: Standardabfrage ueberschreiben (siehe update_studies.py)
+        run: python scripts/gemeinsam/update_studies.py ${{ inputs.erzwingen && '--erzwingen' || '' }}
+
+      - name: Studienliste aktualisieren - zweiter Versuch nach 10 Minuten
+        if: steps.studien.outcome == 'failure'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.AUGEHUB }}
+          MODEL: claude-haiku-4-5
+        run: |
+          echo "::warning::Erster Versuch gescheitert - zweiter Versuch in 10 Minuten."
+          sleep 600
+          python scripts/gemeinsam/update_studies.py ${{ inputs.erzwingen && '--erzwingen' || '' }}
+
+      # Baut RSS-Feed (Mailchimp) und Download-Dateien aus dem Archiv.
+      # Braucht weder API-Key noch Netz – liest nur studien-archiv.json.
+      - name: Newsletter-Feed & Downloads erzeugen
+        run: python scripts/gemeinsam/build_newsletter.py
+
+      # Feste Seiten je Studie (studie/<pmid>/), Uebersicht, sitemap.xml und
+      # robots.txt - damit Suchmaschinen und KI-Dienste die Zusammenfassungen
+      # finden. Ohne JavaScript sahen sie bis 11.11.2026 nur die leere Huelle,
+      # und /#studie-<PMID> ist fuer sie keine eigene Adresse. Liest nur das
+      # Archiv, deterministisch wie der Feed. Ein Fehler hier darf das
+      # Studien-Update nicht aufhalten.
+      - name: Studienseiten und Sitemap erzeugen
+        continue-on-error: true
+        run: python scripts/gemeinsam/studienseiten.py
+
+      # ---- Ausschreibungsradar -------------------------------------------
+      # Der Radar laeuft EINMAL ZENTRAL im Versorgungsforschungs-Portal und
+      # teilt sein Ergebnis nach zwoelf Themengebieten auf; die elf
+      # Schwesterportale holen sich daraus nur ihre Zahl (naechster Schritt).
+      # Deshalb die Bedingung auf das Repository - die Datei selbst bleibt in
+      # allen zwoelf Portalen wortgleich und wird weiter aus der Vorlage
+      # gepflegt.
+      #
+      # Gesucht wird nur montags und donnerstags: Das Skript prueft LAUFTAGE
+      # selbst und beendet sich an anderen Tagen ohne Kosten. Der Zeitplan
+      # bleibt taeglich, damit ein ausgefallener Montag am Donnerstag nicht
+      # zusaetzlich fehlt.
+      #
+      # Ein Fehler hier darf das Studien-Update nicht scheitern lassen. Er
+      # bleibt trotzdem sichtbar: ausschreibungen.json behaelt dann den alten
+      # Stand, und der Sammelbericht meldet einen veralteten Radar.
+      - name: Ausschreibungsradar aktualisieren (nur Versorgungsforschung)
+        if: github.repository == 'mvf-portal/versorgungsforschung-portal'
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.AUGEHUB }}
+        run: python scripts/ausschreibungen.py
+
+      # Setzt in index.html die Fristen des eigenen Themengebiets. Laeuft in
+      # ALLEN zwoelf Portalen und jeden Tag: Der Abruf kostet nichts und kein
+      # Modell, und die Karte soll auch dann stimmen, wenn der zentrale Lauf
+      # aussetzt. Im Versorgungsforschungs-Portal liest das Skript die eben
+      # geschriebene Datei lokal, in den uebrigen holt es sie aus dem
+      # VF-Repository - dort also der Stand des letzten dortigen Pushes.
+      - name: Radar-Hinweis dieses Hubs setzen
+        continue-on-error: true
+        run: python scripts/gemeinsam/radar_hinweis.py
+
+      # ---- Zulassungsradar (EMA) ------------------------------------------
+      # Laeuft wie der Ausschreibungsradar nur zentral, aber TAEGLICH: Die
+      # EMA aktualisiert ihre Tabelle jede Nacht, und ein CHMP-Gutachten ist
+      # genau so lange eine Neuigkeit, wie es noch keiner gemeldet hat.
+      #
+      # Der Lauf kostet wenig: Zugeordnet wird ohne Modell ueber den
+      # MeSH-Begriff, und der deutsche Satz wird je Mittel nur einmal
+      # geschrieben und danach aus zulassungen.json uebernommen. An einem Tag
+      # ohne neue Zulassung faellt also gar kein Modellaufruf an.
+      - name: Zulassungsradar aktualisieren (nur Versorgungsforschung)
+        id: zulassungen
+        if: github.repository == 'mvf-portal/versorgungsforschung-portal'
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.AUGEHUB }}
+        run: python scripts/zulassungen.py
+
+      # Setzt in index.html die Zahl des eigenen Themengebiets. Laeuft in
+      # ALLEN Portalen - auch in den acht ohne Krankheitsbild, wo es dann eine
+      # Null schreibt und die Karte verborgen bleibt. So muss der Workflow
+      # nicht wissen, welcher Hub welchen Zuschnitt hat.
+      - name: Zulassungshinweis dieses Hubs setzen
+        continue-on-error: true
+        run: python scripts/gemeinsam/zulassungen_hinweis.py
+
+      # ---- Newsfeed aus dem eigenen Archiv --------------------------------
+      # Sucht ueber die WordPress-Suche von m-vf.de nach Beitraegen zum
+      # Themenfeld dieses Hubs - ohne Sprachmodell, ohne Schluessel, also
+      # taeglich und in allen zwoelf Portalen. Findet er nichts, bleibt der
+      # Block stehen, wie er ist: Eine leere Karte saehe aus wie ein Thema,
+      # ueber das nie etwas geschrieben wurde.
+      - name: Newsfeed aus dem MVF-Archiv setzen
+        continue-on-error: true
+        run: python scripts/gemeinsam/newsfeed.py
+
+      # Legt bei Mailchimp einen ENTWURF an und schickt eine Testausgabe zur
+      # Entwurf anlegen, pruefen, terminieren. Verschickt wird hier noch nichts:
+      # Die Kampagne wird auf TERMIN_UTC gesetzt und laesst sich bis dahin in
+      # Mailchimp absagen. Faellt der Torwaechter durch, bleibt der Entwurf
+      # liegen. Ohne hinterlegten Schluessel passiert schlicht nichts; ein
+      # Fehler hier darf das Studien-Update nicht scheitern lassen - und er
+      # faellt in die sichere Richtung, weil dann eben nichts terminiert ist.
+      - name: Newsletter-Entwurf anlegen, pruefen und terminieren
+        id: newsletter
+        # Scheitert dieser Schritt, laufen die folgenden trotzdem: Startseite,
+        # Archiv und Feed sind dann laengst gebaut, und eine Stoerung bei
+        # Mailchimp soll nicht auch noch die Portalseite auf dem Stand des
+        # Vortags stehen lassen.
+        #
+        # Der Preis war bis zum 22.09.2026, dass der Lauf GRUEN blieb. An
+        # diesem Morgen fielen drei Hubs in Mailchimps Grenze von zehn
+        # gleichzeitigen Verbindungen und verloren ihre Ausgabe - sichtbar war
+        # das nirgends. Die Laufwache liest den Lauf-Status und meldete "OK
+        # Pflege: 06:20 Uhr gelaufen". Aufgefallen ist es der Versandkontrolle,
+        # eine Stunde NACH dem Versandtermin.
+        #
+        # Deshalb der letzte Schritt dieses Workflows: Er macht den Lauf
+        # nachtraeglich rot. Erst wird committet und die Seite gebaut, dann
+        # faellt der Lauf um. Die Laufwache sieht "fehlgeschlagen", stoesst
+        # erneut an und meldet es.
+        continue-on-error: true
+        env:
+          # Das Geheimnis heisst in diesem Repository AUGEHUBMC ("MC" fuer
+          # Mailchimp - nicht mit AUGEHUB verwechseln, das ist der
+          # Claude-Schluessel).
+          MAILCHIMP_API_KEY: ${{ secrets.AUGEHUBMC }}
+        if: ${{ !inputs.nur_studien }}
+        run: python scripts/gemeinsam/mailchimp_entwurf.py
+
+      - name: Committen & pushen (nur bei Änderung)
+        id: commit
+        env:
+          DATEIEN: index.html studien-archiv.json studien-feed.xml download versand-status.json ausschreibungen.html ausschreibungen.json zulassungen.html zulassungen.json studie sitemap.xml robots.txt
+        run: |
+          # Nicht jedes Portal hat jede Datei: ausschreibungen.html/.json
+          # entstehen nur im Versorgungsforschungs-Portal, weil der Radar dort
+          # zentral laeuft. `git add` bricht an einem Pfad ab, den es nicht
+          # gibt (29.08.2026: elf Hubs scheiterten genau daran, nachdem die
+          # beiden Namen in die Liste kamen). Deshalb wird die Liste vorher auf
+          # das eingedampft, was wirklich im Arbeitsverzeichnis liegt.
+          VORHANDEN=""
+          for f in $DATEIEN; do
+            [ -e "$f" ] && VORHANDEN="$VORHANDEN $f"
+          done
+          if [ -z "$VORHANDEN" ] || [ -z "$(git status --porcelain $VORHANDEN)" ]; then
+            echo "Keine Änderung – nichts zu committen."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name  "Augenheilkunde-Portal Bot"
+          git config user.email "stegmaier@m-vf.de"
+          git add $VORHANDEN
+          git commit -m "Studien-Update $(TZ=Europe/Berlin date +%d.%m.%Y)"
+          # Zwei Laeufe zugleich sind moeglich. Am 13.09.2026 liess GitHub den
+          # Dirigenten zwei Stunden auf einen Runner warten; die Laufwache hielt
+          # ihn fuer ausgefallen und stiess dieselben drei Portale an - fuenf
+          # Sekunden bevor er es selbst tat. Wer als Zweiter pusht, faellt sonst
+          # auf "! [rejected] main -> main", und der Lauf gilt als gescheitert,
+          # obwohl er alles richtig gemacht hat.
+          #
+          # Zusammengefuehrt wird nichts: index.html und studien-archiv.json
+          # sind erzeugte Dateien, ein zeilenweiser Merge ergaebe dort Unsinn.
+          # Stattdessen wird unser Stand auf den fremden obendraufgesetzt -
+          # beide stammen aus einem vollstaendigen Lauf desselben Tages, und
+          # `git add $VORHANDEN` fasst nur die erzeugten Dateien an. Was der
+          # andere Lauf sonst noch gepusht haben mag, bleibt unberuehrt.
+          for VERSUCH in 1 2 3; do
+            if git push; then
+              echo "changed=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "Push abgelehnt (Versuch $VERSUCH) - fremder Stand wird geholt."
+            git fetch origin main
+            git reset --mixed origin/main
+            if [ -z "$(git status --porcelain $VORHANDEN)" ]; then
+              echo "Der andere Lauf hat dasselbe geschrieben - nichts mehr zu tun."
+              echo "changed=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            git add $VORHANDEN
+            git commit -m "Studien-Update $(TZ=Europe/Berlin date +%d.%m.%Y)"
+          done
+          echo "Push auch nach drei Versuchen abgelehnt."
+          exit 1
+
+      # Pushes mit dem GITHUB_TOKEN lösen nicht zuverlässig einen Pages-Build aus.
+      # Deshalb stoßen wir ihn explizit an; schlägt das fehl, ist der Lauf trotzdem OK
+      # (der Build kommt dann über den normalen Push-Mechanismus).
+      - name: GitHub-Pages-Build anstoßen
+        if: steps.commit.outputs.changed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds"
+
+      # Muss der LETZTE Schritt bleiben: Alles, was noch geschehen soll, ist
+      # bis hierher geschehen. Siehe die Begruendung beim Schritt
+      # "Newsletter-Entwurf anlegen" - dort steht, warum er gruen scheitern
+      # darf und warum der Lauf es hier trotzdem sagen muss.
+      - name: Ausgefallenen Newsletter- oder Radar-Schritt melden
+        if: steps.newsletter.outcome == 'failure' || steps.zulassungen.outcome == 'failure'
+        run: |
+          if [ "${{ steps.newsletter.outcome }}" = "failure" ]; then
+            echo "::error::Der Newsletter-Schritt ist gescheitert - fuer heute" \
+                 "liegt womoeglich KEINE terminierte Ausgabe vor. Startseite," \
+                 "Archiv und Feed sind aktualisiert; nachzusehen ist allein der" \
+                 "Schritt 'Newsletter-Entwurf anlegen, pruefen und terminieren'."
+          fi
+          # Seit dem 23.10.2026 auch der Radar. Er ist am 22. und 23.10. je
+          # einmal still abgebrochen (ModuleNotFoundError: openpyxl), und der
+          # Lauf meldete beide Male Erfolg: Die Seite zeigte einfach die Daten
+          # vom Vortag weiter, und das sieht aus wie ein ruhiger Tag. Dieselbe
+          # Lehre wie am 22.09.2026 beim Newsletter - was gruen scheitert,
+          # faellt niemandem auf.
+          if [ "${{ steps.zulassungen.outcome }}" = "failure" ]; then
+            echo "::error::Der Zulassungsradar ist gescheitert - zulassungen.json" \
+                 "und die Radarseite stehen auf dem Stand des Vortags. Studien," \
+                 "Archiv und Feed sind aktualisiert; nachzusehen ist allein der" \
+                 "Schritt 'Zulassungsradar aktualisieren'."
+          fi
+          exit 1
