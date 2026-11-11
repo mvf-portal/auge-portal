@@ -1,1 +1,80 @@
-[]
+[
+ {
+  "pmid": "43012868",
+  "journal": "Ophthalmic Epidemiol",
+  "year": "2026",
+  "author": "Tan VZZ et al.",
+  "pubdate": "11.11.2026",
+  "added": "11.11.2026",
+  "transfer": "Multicenter, globale Evidenz zur Therapieevaluation, anwendbar auf deutsches Glaukommanagement",
+  "title": "Antinarben-Mittel bei Glaukom-Drainagen: weniger Tropfen, mehr Hypotonie-Risiko",
+  "sum": "Systematische Übersichtsarbeit mit Metaanalyse von 28 Studien (12 RCTs, 16 vergleichende Kohortenstudien; n=1621 Augen) bewertete den Effekt von Mitomycin C und anderen antifibrotischen Substanzen auf Glaukom-Dränagen.",
+  "result": "Antinarben-Mittel, besonders Mitomycin C, reduzierten den Medikamentenbedarf Monat 6/12 um 0,42–0,76 Tropfen (p ≤ 0,013), erhöhten aber Hypotonie-Risiko (OR 2,06 bis 2,27; p ≤ 0,001); Augeninnendruck war nicht signifikant unterschiedlich; Reoperations-Quote mit Mitomycin gesenkt (OR 0,42; p = 0,007).",
+  "aufgenommen": "2026-11-11"
+ },
+ {
+  "pmid": "43006994",
+  "journal": "Transl Vis Sci Technol",
+  "year": "2026",
+  "author": "Egbring C et al.",
+  "pubdate": "02.11.2026",
+  "added": "10.11.2026",
+  "transfer": "Deutsche Universitätsklinik, Methode übertragbar auf deutsche Augenarztpraxen",
+  "title": "Amblyopie zeigt organisches Korrelat: verminderte Netzhautgefäßdichte",
+  "sum": "Prospektive Studie an der Universitätsklinik Münster mit 102 Augen von 51 Patienten mit einseitiger Amblyopie nutzte hochauflösende OCT-Angiographie, um Gefäßveränderungen zu quantifizieren.",
+  "result": "Amblyope Augen zeigten signifikant niedrigere Gefäßpixeldichte (p = 0,01), weniger Gefäßverzweigungen (p = 0,01), kürzere Gefäßlänge (p < 0,01) und höhere Gefäßlücken-Heterogenität (p < 0,01) als Partneraugen; keine signifikanten Unterschiede beim Choroid; moderate Amblyopie zeigte stärkere Veränderungen als milde (p < 0,01).",
+  "aufgenommen": "2026-11-11"
+ },
+ {
+  "pmid": "43003120",
+  "journal": "Klin Monbl Augenheilkd",
+  "year": "2026",
+  "author": "Faber-Krahl H et al.",
+  "pubdate": "09.11.2026",
+  "added": "09.11.2026",
+  "transfer": "Deutsche Klinikdaten, direkte Relevanz für Gesundheitspolitik und Prävention",
+  "title": "Kongenitale Katarakte in Deutschland: späte Diagnose trotz Screening-Programmen",
+  "sum": "Retrospektive Analyse von 142 Kindern mit angeborenen Katarakten an einer deutschen Universitätsklinik (2009–2023) untersuchte, ob Morphologie und Entfernung zur Spezialklinik den Diagnosezeitpunkt beeinflussen.",
+  "result": "50% einseitige und 50% beidseitige Katarakte; nukleäre Katarakte wurden früher diagnostiziert als andere Morphologien (p < 0,001); Entfernung zum tertiären Zentrum hatte keinen signifikanten Einfluss (p = 0,223); das Einzugsgebiet wuchs signifikant über die Zeit (p = 0,002), deutet aber auf unzureichende Screeningverfahren oder ophthalmologische Unterversorgung von Kindern in Deutschland hin.",
+  "aufgenommen": "2026-11-11"
+ },
+ {
+  "pmid": "42995688",
+  "journal": "Int J Circumpolar Health",
+  "year": "2026",
+  "author": "Haanes GG et al.",
+  "pubdate": "31.12.2026",
+  "added": "07.11.2026",
+  "transfer": "Nordeuropäisches Gesundheitssystem, Prinzipien auf deutsche Flächenversorgung anwendbar",
+  "title": "Selbsteinschätzung des Sehens ist nicht verlässlich: Screening in ländlichen Regionen braucht objektive Tests",
+  "sum": "Querschnittstudie bei 167 älteren Menschen auf den Färöer (2017–2019) verglich Selbstaussagen zum Sehvermögen mit ophthalmologisch gemessener Sehschärfe.",
+  "result": "60,5% berichteten gutes Sehen, aber nur 28,2% erfüllten das ophthalmologische Kriterium (≥0,80 Snellen); Übereinstimmung war schwach (Cohens Kappa 0,09; AUC 0,57); zum Vergleich: Hörereinschätzung zeigte moderate Übereinstimmung (Kappa 0,49; AUC 0,77).",
+  "aufgenommen": "2026-11-11"
+ },
+ {
+  "pmid": "42990961",
+  "journal": "Front Public Health",
+  "year": "2026",
+  "author": "Iyer V et al.",
+  "pubdate": "09.10.2026",
+  "added": "06.11.2026",
+  "transfer": "Niederländisches Versicherungssystem mit Vergleichbarkeit zu Deutschland",
+  "title": "Näherarbeit und Bildschirme begrenzen: Niederländisches Netzwerk zeigt, wie Gesundheitspolitik wirkt",
+  "sum": "Qualitative Fallstudie aus den Niederlanden (2018–2026) reflektiert Arbeit des multidisziplinären Netzwerks 'View Outdoors' zur Eindämmung der Myopie-Epidemie bei Kindern mittels Gesundheitsadvokacy.",
+  "result": "Netzwerk erarbeitete nationale Leitlinien, Faktensheets und multisektorale Partnerschaften; deckte Lücken auf: wenig strukturelle Beteiligung von Kindern/Eltern, Abhängigkeit von kleinem Expertenkreis; Empfehlung: stärkere Einbindung betroffener Familien und systematische Verhaltensevaluierung für die nächste Phase.",
+  "aufgenommen": "2026-11-11"
+ },
+ {
+  "pmid": "42980156",
+  "journal": "J Glaucoma",
+  "year": "2026",
+  "author": "Shang X et al.",
+  "pubdate": "03.11.2026",
+  "added": "04.11.2026",
+  "transfer": "Schweizer Universitätsklinik, Verfahren übertragbar auf deutsches Glaukommanagement",
+  "title": "Trabekulektomie verlangsamt Glaukom-bedingte Netzhauttünnungen deutlich",
+  "sum": "Retrospektive Longitudinalstudie an der Universität Bern mit 64 Augen von 59 Glaukom-Patienten (2012–2022) verglich Veränderungsraten in Makula-Schichtdicken vor und nach Trabekulektomie mittels OCT.",
+  "result": "Mittlere Nachbeobachtung 65,7±4,9 Monate; nach erfolgreich durchgeführter Trabekulektomie signifikant verlangsamter Rückgang der Retinalen Nervenfaserschicht (p < 0,001) und Ganglienzellschicht (p = 0,04); in der Erfolgsgruppe auch Choriokappillaris-Erhalt signifikant (p = 0,04).",
+  "aufgenommen": "2026-11-11"
+ }
+]
