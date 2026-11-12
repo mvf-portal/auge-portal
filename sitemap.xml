@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- erzeugt von hub-scripts/studienseiten.py -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://auge.m-vf.de/</loc><lastmod>2026-11-11</lastmod></url>
-<url><loc>https://auge.m-vf.de/studie/</loc><lastmod>2026-11-11</lastmod></url>
+<url><loc>https://auge.m-vf.de/</loc><lastmod>2026-11-12</lastmod></url>
+<url><loc>https://auge.m-vf.de/studie/</loc><lastmod>2026-11-12</lastmod></url>
 <url><loc>https://auge.m-vf.de/neue-studien.html</loc></url>
 <url><loc>https://auge.m-vf.de/newsletter.html</loc></url>
 <url><loc>https://auge.m-vf.de/ueber.html</loc></url>
+<url><loc>https://auge.m-vf.de/studie/43012660/</loc><lastmod>2026-11-12</lastmod></url>
+<url><loc>https://auge.m-vf.de/studie/43012659/</loc><lastmod>2026-11-12</lastmod></url>
+<url><loc>https://auge.m-vf.de/studie/43008813/</loc><lastmod>2026-11-12</lastmod></url>
+<url><loc>https://auge.m-vf.de/studie/42993762/</loc><lastmod>2026-11-12</lastmod></url>
+<url><loc>https://auge.m-vf.de/studie/42980598/</loc><lastmod>2026-11-12</lastmod></url>
+<url><loc>https://auge.m-vf.de/studie/42961684/</loc><lastmod>2026-11-12</lastmod></url>
 <url><loc>https://auge.m-vf.de/studie/43012868/</loc><lastmod>2026-11-11</lastmod></url>
 <url><loc>https://auge.m-vf.de/studie/43006994/</loc><lastmod>2026-11-11</lastmod></url>
 <url><loc>https://auge.m-vf.de/studie/43003120/</loc><lastmod>2026-11-11</lastmod></url>
