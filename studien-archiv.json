@@ -39,6 +39,32 @@
   "aufgenommen": "2026-11-13"
  },
  {
+  "pmid": "43021217",
+  "journal": "BMC Public Health",
+  "year": "2026",
+  "author": "Al-Haidari SA et al.",
+  "pubdate": "19.08.2026",
+  "added": "12.11.2026",
+  "transfer": "Jemen, endemisches Gebiet – begrenzte Übertragbarkeit auf Deutschland, zeigt aber Wirksamkeit von Massenbehandlung.",
+  "title": "Trachoma in Jemen: Prävalenz unter 1 % nach Massenbehandlung",
+  "sum": "Querschnittsstudie zur Trachom-Prävalenz bei Kindern in zuvor hochendemischen Bezirken des Jemen nach drei Runden Massenmedikation.",
+  "result": "Die Prävalenz von Trachoma-Inflammation bei Kindern (TF 1-9) betrug 0,9 % (11/1290), eine Reduktion um 83,5–95,2 % gegenüber 2013. Unzureichende sanitäre Einrichtungen (AOR 10,2) und Augen-/Nasensekret (AOR 60,0) waren unabhängige Risikofaktoren. Die Reduktion unterschreitet die WHO-Eliminationsschwelle von 5 %.",
+  "aufgenommen": "2026-11-13"
+ },
+ {
+  "pmid": "43021189",
+  "journal": "BMC Public Health",
+  "year": "2026",
+  "author": "Bleau M et al.",
+  "pubdate": "19.08.2026",
+  "added": "12.11.2026",
+  "transfer": "38 Länder, Kanada – zeigt Rehabilitationslücke bei Sehbehinderung auch in Ländern mit vergleichbarem System.",
+  "title": "Mobilitätstraining verbessert Unabhängigkeit und Wohlbefinden bei Sehverlust",
+  "sum": "Internationale Befragungsstudie mit 752 Personen mit Sehbehinderung zu Auswirkungen spezialisierter Mobilitätsschulung auf unabhängige Fortbewegung und Lebensqualität.",
+  "result": "Nur 35,6 % erhielten Mobilitätstraining. Wer trainiert wurde, berichtete höheres Wohlbefinden (p<0,001), wirtschaftlichen Erfolg (p<0,01), bessere Schulbildung (p<0,01) und benötigte weniger fremde Hilfe (p<0,05). Mangelnde Verfügbarkeit war häufigster Grund gegen Training.",
+  "aufgenommen": "2026-11-13"
+ },
+ {
   "pmid": "43020385",
   "journal": "Ophthalmology",
   "year": "2026",
@@ -65,6 +91,45 @@
   "aufgenommen": "2026-11-13"
  },
  {
+  "pmid": "43017896",
+  "journal": "J Refract Surg",
+  "year": "2026",
+  "author": "Heutte C et al.",
+  "pubdate": "12.11.2026",
+  "added": "12.11.2026",
+  "transfer": "Frankreich, deutsche Zentren anwendbar – Technik für Keratokonus mit dünner Hornhaut potenziell aussagekräftig, längerfristige Daten nötig.",
+  "title": "Temporärer Lentikel-gestütztes Cross-linking bei dünner Hornhaut mit Keratokonus: machbar und stabil",
+  "sum": "Prospektive Fallserie mit 14 Augen: scleral-lentikel-gestützte Quervernetzung (KLEx-Lentikel als Verdickung) bei progressivem Keratokonus mit Hornhautdicke <400 µm.",
+  "result": "Axiale Länge reduziert nach 6 Monaten (p=0,001). Keratometrie (Kmax) um 1,10 dpt gesenkt, 13/14 Augen stabilisiert. Hornhautdicke durch Lentikel von 375,0 auf 479,5 µm erhöht. Stromalin in 85,7 % sichtbar in 291,8 µm Tiefe. Keine Dichteverluste des Endothels, keine schweren Komplikationen.",
+  "aufgenommen": "2026-11-13"
+ },
+ {
+  "pmid": "43015698",
+  "journal": "BMC Ophthalmol",
+  "year": "2026",
+  "author": "Oyur G et al.",
+  "pubdate": "23.10.2026",
+  "added": "11.11.2026",
+  "transfer": "Türkei, vergleichbares System – Lamina-cribrosa-Indizes allein kein Aktivitätsmarker ohne Optikusneuropathie.",
+  "title": "Lamina-cribrosa-Morphologie bei Thyreoiditis: kein Marker der Krankheitsaktivität",
+  "sum": "Querschnittsstudie mit 92 Teilnehmern (12 aktiv, 40 inaktiv erkrankt, 40 Kontrollen) zur Charakterisierung der Lamina-cribrosa-Form mittels OCT bei Thyreoiditis-assoziierten Orbitopathien.",
+  "result": "Keine signifikanten Unterschiede der Lamina-cribrosa-Parameter (Dicke, Tiefe, Krümmung, Index) zwischen aktiven, inaktiven und kontrollen Augen (alle p>0,05). Weder Vergleich aktiv vs. inaktiv noch Fallkontrollvergleich zeigten Unterschiede.",
+  "aufgenommen": "2026-11-13"
+ },
+ {
+  "pmid": "43015646",
+  "journal": "BMC Prim Care",
+  "year": "2026",
+  "author": "Sheng Y et al.",
+  "pubdate": "13.08.2026",
+  "added": "11.11.2026",
+  "transfer": "China, Flächenversorgung – Transfer zu Screening-Zugänglichkeit und Überweisungskoordination auch in Deutschland relevant.",
+  "title": "Verspätete Vorstellung bei diabetischer Retinopathie: halbe Patienten verzögern, weniger zufrieden",
+  "sum": "Konvergente Parallel-Studiendesign mit 235 Symptompatienten zur diabetischen Retinopathie: Häufigkeit, Ursachen und Folgen von Verzögerung beim Facharztbesuch (≥3 Monate).",
+  "result": "46,0 % (108/235) suchten verzögert Hilfe. Untersuchung bereits absolviert (p<0,05), Weiterleitung durch Grundversorger und fehlende frühere Screening erhöhten Verzögerungsrisiko. Verzögerte Patienten berichteten niedrigere Zufriedenheit (p<0,05). Vier qualitative Themen identifiziert: Symptomdeutung, Risikobewertung, Überwindung von Hürden, Reflexion.",
+  "aufgenommen": "2026-11-13"
+ },
+ {
   "pmid": "42955336",
   "journal": "J Neurol",
   "year": "2026",
@@ -75,6 +140,19 @@
   "title": "Spontane Sehverlust-Veränderungen bei Leber-Optikusneuropathie über Jahre hinweg",
   "sum": "Internationale multizentrische retrospektive Studie (CRS-2) zur Erfassung der natürlichen Krankheitsverlauf und spontaner Sehschärfe-Veränderungen bei 402 idebenone-naiven LHON-Patienten mit m.11778G>A, m.3460G>A oder m.14484T>C mtDNA-Varianten.",
   "result": "Von 402 geeigneten Augen waren 385 zu Baseline in der subakuten/dynamischen Phase; 96 Augen waren für 12-Monats-Analyse verfügbar. Primärer Endpunkt (spontane klinisch relevante Besserung oder Stabilisierung): 20,8 % (n=20/96) in der 12-Monats-Gruppe. Spontane Sehschärfe-Veränderungen variieren nach Erkrankungsphase, mtDNA-Variante, Geschlecht und Alter bei Symptombeginn; die Krankheit zeigt mehr Dynamik als bislang berichtet.",
+  "aufgenommen": "2026-11-13"
+ },
+ {
+  "pmid": "42954229",
+  "journal": "Clin Exp Rheumatol",
+  "year": "2026",
+  "author": "Briante M et al.",
+  "pubdate": "26.10.2026",
+  "added": "29.10.2026",
+  "transfer": "Italien, ähnliches Gesundheitssystem – trägt neue Evidenz zu seltener Erkrankung mit Augenbeteiligung bei.",
+  "title": "Behçet-Krankheit in der Schwangerschaft: stabiler Krankheitsverlauf, gute Ergebnisse",
+  "sum": "Retrospektive Analyse von 25 Patientinnen mit Behçet-Krankheit und 48 Schwangerschaften an einem italienischen Zentrum; Vergleich mit Literatur.",
+  "result": "In 80 % der Fälle blieb die Krankheitsaktivität während Schwangerschaft stabil. Geburtsrate 89,6 %, Komplikationen in 27,1 % (überwiegend vor Diagnose). Spontanaborte und tiefe Venenthrombosen waren häufigste Ereignisse. Befunde widersprechen der verbreiteten Annahme einer Aktivierungstendenz in der Schwangerschaft.",
   "aufgenommen": "2026-11-13"
  },
  {
