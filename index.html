@@ -2244,62 +2244,71 @@ const DB = [
 
 // Momentaufnahme neuester Studien (PubMed, nach Datum sortiert) — deutsche Zusammenfassungen
 // === STUDIES-BLOCK-START (taeglich 06:00 Uhr von GitHub Actions ersetzt) ===
-const SNAP_DATE = "13. Nov. 2026, 13:58 Uhr";
+const SNAP_DATE = "14. Nov. 2026, 05:26 Uhr";
 const SNAP_STATUS = "neu";
 const STUDIES = [
   {
-    journal:"J Refract Surg", year:"2026", pmid:"43017896",
-    author:"Heutte C et al.", pubdate:"12.11.2026",
+    journal:"Acta Ophthalmol", year:"2026", pmid:"43023810",
+    author:"Schou MG et al.", pubdate:"13.11.2026",
+    added:"13.11.2026",
+    title:"Dänisches Register zur neovaskulären AMD: Hochgültige Definitionen für Versorgungsstudien validiert",
+    sum:"Nationale multizentrische Validierungsstudie (571 Patienten) zur Genauigkeit von Registerdefinitionen für neovaskuläre AMD in Dänemark basierend auf ICD-10-Codes und Prozedurencodes.",
+    result:"Drei Registerdefinitionen zeigten &gt;90 % Sensitivität, Spezifität und Genauigkeit. Das beste Modell (ICD-10 H353/H353J/H353K + Intravitrealprozedur-Code) erreichte 98,0 % Sensitivität, 98,9 % Spezifität und 98,4 % Genauigkeit in Klinik und Praxis.",
+    transfer:"Dänemark, skandinavisches Gesundheitssystem; Registermethoden auf Deutschland übertragbar für AMD-Versorgungsforschung"
+  },
+  {
+    journal:"J Cataract Refract Surg", year:"2026", pmid:"43024380",
+    author:"Sarkisian S et al.", pubdate:"13.11.2026",
+    added:"13.11.2026",
+    title:"ELIOS-Laseroperation mit Kataraktchirurgie: Sicher und effektiv mit rascher Sehschärfe-Erholung",
+    sum:"Prospektive multizentrische Studie (318 Patienten) zu Sicherheit und visuellen Ergebnissen der kombinierten Phakoemulsifikation und ELIOS-Exzimerlaser-Trabekulostomie über 12 Monate.",
+    result:"Alle Patienten erreichten postoperativ 20/40 oder besser; 69,8 % verbesserten sich um ≥1 Sehschärfe-Zeile. 5 intraoperative Komplikationen bei Kataraktoperation, keine bei ELIOS. Endothelzellverlust 9,1 % bei 12 Monaten. 73 postoperative okulare Ereignisse in 17,3 % (meist frühe, selbstlimitiert).",
+    transfer:"USA, vergleichbare Operationstechnik; zeigt Kombinationsansatz für Glaukom-Kataraktoperation in Deutschland"
+  },
+  {
+    journal:"Int Ophthalmol", year:"2026", pmid:"43024027",
+    author:"Tetik D et al.", pubdate:"13.11.2026",
+    added:"13.11.2026",
+    title:"Lidtumore: Benigne überwiegen bei 92,7 %, Basaliome sind 61,5 % der Malignome",
+    sum:"Retrospektive Analyse (398 histopathologisch bestätigte Lidläsionen, 291 Patienten) zur Epidemiologie, Klinik und Histopathologie von Lidtumoren.",
+    result:"92,7 % benigne, 6,5 % maligne, 0,8 % prämaligne. Mittleres Alter maligner Tumore (61,96 ± 16,24 Jahre) signifikant höher als benigner (51,93 ± 16,60, p=0,013). Plattenepithelkarzinom und Basaliom dominierten (23,1 % bzw. 61,5 % der Malignome). Klinische Diagnosegenauigkeit 81,3 % für Basaliom, starke Übereinkunft mit Histologie (κ=0,719).",
+    transfer:"Türkei, tertiatozentrische Serie; Diagnosegüte für routineklinische Differenzierung verwendbar"
+  },
+  {
+    journal:"BMJ Public Health", year:"2026", pmid:"43022880",
+    author:"Zocher K et al.", pubdate:"10.11.2026",
+    added:"13.11.2026",
+    title:"Diabetische Retinopathie-Screening in Österreich: Opportunistische Modelle erreichen nicht den Erfolg systematischer Programme",
+    sum:"Quasi-experimentelle Kohortenstudie mit 53.500 Patienten zur Aufnahme und Adhärenz bei der DR-Früherkennung in Österreich, wo Screening nicht organisiert stattfindet wie in anderen Ländern.",
+    result:"Nur 46 % der Patienten hatten im ersten Jahr eine augenärztliche Untersuchung, 16,7 % erhielten über 3 Jahre hinweg jährliche Untersuchungen. Eine Diabetes-Management-Programm erhöhte die Aufnahme, aber opportunistische Modelle erreichten nicht die Teilnahmequoten systematischer Programme in anderen Ländern.",
+    transfer:"Österreich, vergleichbares Krankenversicherungssystem; zeigt Risiken des opportunistischen vs. organisierten Screenings für Deutschland"
+  },
+  {
+    journal:"Invest Ophthalmol Vis Sci", year:"2026", pmid:"43018422",
+    author:"Hallali G et al.", pubdate:"02.11.2026",
     added:"12.11.2026",
-    title:"Temporärer Lentikel-gestütztes Cross-linking bei dünner Hornhaut mit Keratokonus: machbar und stabil",
-    sum:"Prospektive Fallserie mit 14 Augen: scleral-lentikel-gestützte Quervernetzung (KLEx-Lentikel als Verdickung) bei progressivem Keratokonus mit Hornhautdicke &lt;400 µm.",
-    result:"Axiale Länge reduziert nach 6 Monaten (p=0,001). Keratometrie (Kmax) um 1,10 dpt gesenkt, 13/14 Augen stabilisiert. Hornhautdicke durch Lentikel von 375,0 auf 479,5 µm erhöht. Stromalin in 85,7 % sichtbar in 291,8 µm Tiefe. Keine Dichteverluste des Endothels, keine schweren Komplikationen.",
-    transfer:"Frankreich, deutsche Zentren anwendbar – Technik für Keratokonus mit dünner Hornhaut potenziell aussagekräftig, längerfristige Daten nötig."
+    title:"RHO p.(Met216Lys) verursacht fortschreitende Chorioretinale Dystrophie statt klassischer Retinitis pigmentosa",
+    sum:"Klinische Kohortenstudie (17 Patienten, 8 Familien) über 13 Jahre Verlauf mit multimodaler Bildgebung zu einer seltenen RHO-Variante, die Choroideremia-ähnliche Symptome verursacht.",
+    result:"Nachtblindheit trat bei 71 % auf. Während des Verlaufs zeigten sich pericentrale Skotome, die sich vergößerten und verschmolzen. OCT zeigte medianalen Ellipsoid-Zone-Verlust von 176 µm/Jahr. Das Phänotyp unterschied sich deutlich von klassischer RHO-assoziierter Retinitis pigmentosa.",
+    transfer:"Internationale Kohortenstudie, generalisierbare Erkenntnisse zu seltenen Genotypen für genetische Beratung"
   },
   {
-    journal:"Clin Exp Rheumatol", year:"2026", pmid:"42954229",
-    author:"Briante M et al.", pubdate:"26.10.2026",
-    added:"29.10.2026",
-    title:"Behçet-Krankheit in der Schwangerschaft: stabiler Krankheitsverlauf, gute Ergebnisse",
-    sum:"Retrospektive Analyse von 25 Patientinnen mit Behçet-Krankheit und 48 Schwangerschaften an einem italienischen Zentrum; Vergleich mit Literatur.",
-    result:"In 80 % der Fälle blieb die Krankheitsaktivität während Schwangerschaft stabil. Geburtsrate 89,6 %, Komplikationen in 27,1 % (überwiegend vor Diagnose). Spontanaborte und tiefe Venenthrombosen waren häufigste Ereignisse. Befunde widersprechen der verbreiteten Annahme einer Aktivierungstendenz in der Schwangerschaft.",
-    transfer:"Italien, ähnliches Gesundheitssystem – trägt neue Evidenz zu seltener Erkrankung mit Augenbeteiligung bei."
-  },
-  {
-    journal:"BMC Ophthalmol", year:"2026", pmid:"43015698",
-    author:"Oyur G et al.", pubdate:"23.10.2026",
-    added:"11.11.2026",
-    title:"Lamina-cribrosa-Morphologie bei Thyreoiditis: kein Marker der Krankheitsaktivität",
-    sum:"Querschnittsstudie mit 92 Teilnehmern (12 aktiv, 40 inaktiv erkrankt, 40 Kontrollen) zur Charakterisierung der Lamina-cribrosa-Form mittels OCT bei Thyreoiditis-assoziierten Orbitopathien.",
-    result:"Keine signifikanten Unterschiede der Lamina-cribrosa-Parameter (Dicke, Tiefe, Krümmung, Index) zwischen aktiven, inaktiven und kontrollen Augen (alle p&gt;0,05). Weder Vergleich aktiv vs. inaktiv noch Fallkontrollvergleich zeigten Unterschiede.",
-    transfer:"Türkei, vergleichbares System – Lamina-cribrosa-Indizes allein kein Aktivitätsmarker ohne Optikusneuropathie."
-  },
-  {
-    journal:"BMC Public Health", year:"2026", pmid:"43021217",
-    author:"Al-Haidari SA et al.", pubdate:"19.08.2026",
+    journal:"Invest Ophthalmol Vis Sci", year:"2026", pmid:"43018421",
+    author:"Hua X et al.", pubdate:"02.11.2026",
     added:"12.11.2026",
-    title:"Trachoma in Jemen: Prävalenz unter 1 % nach Massenbehandlung",
-    sum:"Querschnittsstudie zur Trachom-Prävalenz bei Kindern in zuvor hochendemischen Bezirken des Jemen nach drei Runden Massenmedikation.",
-    result:"Die Prävalenz von Trachoma-Inflammation bei Kindern (TF 1-9) betrug 0,9 % (11/1290), eine Reduktion um 83,5–95,2 % gegenüber 2013. Unzureichende sanitäre Einrichtungen (AOR 10,2) und Augen-/Nasensekret (AOR 60,0) waren unabhängige Risikofaktoren. Die Reduktion unterschreitet die WHO-Eliminationsschwelle von 5 %.",
-    transfer:"Jemen, endemisches Gebiet – begrenzte Übertragbarkeit auf Deutschland, zeigt aber Wirksamkeit von Massenbehandlung."
+    title:"OCT-Dämpfungskoeffizienten zeigen RPE-Schäden bei LCHADD-Retinopathie früher und deutlicher",
+    sum:"Prospektive Technik-Validierungsstudie (43 Augen, 22 Patienten) mit OCT-basierten optischen Dämpfungskoeffizienten (OAC) zur Detektion und Quantifizierung von RPE-Abnormitäten.",
+    result:"OAC-Bilder zeigten RPE-Defekte konsistent mit Fundus-Autofluoreszenz, mit besserer und detaillierterer Visualisierung als Standard-OCT. Der mittlere retinale OAC nahm signifikant mit Krankheitsprogression ab (p&lt;0,001) und korrelierte stark mit klinischen Maßen.",
+    transfer:"Tierfreie Bildgebungsstudie; neue OCT-Analysen auf menschliche Chorioretinaldegenerationen anwendbar"
   },
   {
-    journal:"BMC Public Health", year:"2026", pmid:"43021189",
-    author:"Bleau M et al.", pubdate:"19.08.2026",
-    added:"12.11.2026",
-    title:"Mobilitätstraining verbessert Unabhängigkeit und Wohlbefinden bei Sehverlust",
-    sum:"Internationale Befragungsstudie mit 752 Personen mit Sehbehinderung zu Auswirkungen spezialisierter Mobilitätsschulung auf unabhängige Fortbewegung und Lebensqualität.",
-    result:"Nur 35,6 % erhielten Mobilitätstraining. Wer trainiert wurde, berichtete höheres Wohlbefinden (p&lt;0,001), wirtschaftlichen Erfolg (p&lt;0,01), bessere Schulbildung (p&lt;0,01) und benötigte weniger fremde Hilfe (p&lt;0,05). Mangelnde Verfügbarkeit war häufigster Grund gegen Training.",
-    transfer:"38 Länder, Kanada – zeigt Rehabilitationslücke bei Sehbehinderung auch in Ländern mit vergleichbarem System."
-  },
-  {
-    journal:"BMC Prim Care", year:"2026", pmid:"43015646",
-    author:"Sheng Y et al.", pubdate:"13.08.2026",
-    added:"11.11.2026",
-    title:"Verspätete Vorstellung bei diabetischer Retinopathie: halbe Patienten verzögern, weniger zufrieden",
-    sum:"Konvergente Parallel-Studiendesign mit 235 Symptompatienten zur diabetischen Retinopathie: Häufigkeit, Ursachen und Folgen von Verzögerung beim Facharztbesuch (≥3 Monate).",
-    result:"46,0 % (108/235) suchten verzögert Hilfe. Untersuchung bereits absolviert (p&lt;0,05), Weiterleitung durch Grundversorger und fehlende frühere Screening erhöhten Verzögerungsrisiko. Verzögerte Patienten berichteten niedrigere Zufriedenheit (p&lt;0,05). Vier qualitative Themen identifiziert: Symptomdeutung, Risikobewertung, Überwindung von Hürden, Reflexion.",
-    transfer:"China, Flächenversorgung – Transfer zu Screening-Zugänglichkeit und Überweisungskoordination auch in Deutschland relevant."
+    journal:"Ophthalmol Sci", year:"2026", pmid:"43022604",
+    author:"Cicinelli MV et al.", pubdate:"08.10.2026",
+    added:"13.11.2026",
+    title:"Diabetisches und uveales Makulaödem unterscheiden sich strukturell und in Kortikosteroid-Ansprech stärker als erwartet",
+    sum:"Retrospektive Kohortenstudie (173 Augen: 114 DMÖ, 59 uveales Makulaödem) mit KI-gestützter OCT-Analyse struktureller Biomarker und deren Assoziation mit Sehschärfe und Steroid-Ansprech.",
+    result:"Uveales Makulaödem zeigte niedrigeres Gesamtfluidvolumen (0,62 vs. 2,01 mm³, p&lt;0,001), höhere hyperreflektive Foki (109 vs. 95,4 Läsionen, p=0,04) und weniger Ellipsoid-Zone-Disruption (13,7 % vs. 26,5 %, p=0,03). DMÖ Cluster 2 hatte längere Zeit bis OCT-Trockenheit nach Kortikosteroid-Therapie als Uveitis (Hazard Ratio 0,35, p=0,008).",
+    transfer:"Italien, internationale Kohorte; zeigt biologische Unterschiede für Therapieentscheidung und Prognose"
   },
 ];
 // === STUDIES-BLOCK-ENDE ===
@@ -2314,7 +2323,7 @@ const RADAR_FRISTEN = [];
 // === RADAR-BLOCK-ENDE ===
 
 // === ZULASSUNG-BLOCK-START (taeglich von GitHub Actions ersetzt) ===
-const ZUL_STAND = "13.11.2026";
+const ZUL_STAND = "14.11.2026";
 const ZUL_EIGENE = 0;
 const ZUL_GUTACHTEN = 0;
 const ZUL_ZULASSUNG = 0;
@@ -2324,7 +2333,7 @@ const ZUL_DIGA = 0;
 
 // Beitraege aus dem MVF-Archiv zum Thema — taeglich von scripts/newsfeed.py
 // === NEWS-BLOCK-START (taeglich von GitHub Actions ersetzt) ===
-const NEWS_STAND = "13.11.2026";
+const NEWS_STAND = "14.11.2026";
 const NEWS = [
   {titel:"Journalistenpreis 2026 vergeben: PRO RETINA zeichnet fünf Beiträge aus", datum:"2026-10-05", url:"https://www.monitor-versorgungsforschung.de/news/journalistenpreis-2026-vergeben-pro-retina-zeichnet-fuenf-beitraege-aus/"},
   {titel:"Patientensymposium zu AMD in Berlin: PRO RETINA beim DOG-Kongress", datum:"2026-09-10", url:"https://www.monitor-versorgungsforschung.de/news/patientensymposium-zu-amd-in-berlin-pro-retina-beim-dog-kongress/"},
