@@ -817,7 +817,13 @@
      Knopf ist die Hauptaktion der Seite, das Logo darf nicht mit ihm
      konkurrieren. */
   .sponsor{ display:flex; align-items:center; gap:11px; }
-  .sponsor-vor{ font-size:12px; line-height:1.3; color:var(--ink-faint); }
+  .sponsor-vor{ font-size:14px; line-height:1.3; color:var(--ink-faint); }
+  /* Der Asterisk sitzt in Lato schon auf Hoehe der Oberlaenge. Was <sup>
+     von sich aus an Hochstellung mitbringt, hob ihn darueber hinaus und
+     liess ihn ueber dem Wort schweben. Diese Stufe hat Peter am
+     24.11.2026 aus drei vorgelegten gewaehlt. */
+  .sponsor sup{ font-size:0.8em; vertical-align:baseline;
+                position:relative; top:-0.12em; }
   .sponsor-logos{ display:flex; align-items:center; gap:16px; }
   .sponsor-logos img{ height:42px; width:auto; max-width:240px; display:block; }
   /* Der Hinweis steht neben dem Logo, nicht darunter: Sonst drueckt er das Logo
@@ -835,8 +841,8 @@
      nicht von Hand - sonst stuende irgendwann der falsche Wortlaut neben dem
      Logo. */
   .koop .sponsor{ align-items:center; }
-  .koop .sponsor-vor{ font-size:12.5px; }
-  .sponsor-vor-stark{ font-weight:700; color:var(--ink-soft); font-size:13.5px; }
+  .koop .sponsor-vor{ font-size:14.5px; }
+  .sponsor-vor-stark{ font-weight:700; color:var(--ink-soft); font-size:15.5px; }
   .koop-fuss{ margin:11px 0 0; max-width:62ch; }
   /* 60 statt 42 Pixel: Eine Kooperation wird gezeigt, nicht beilaeufig
      erwaehnt. */
@@ -846,7 +852,35 @@
      Tastaturnutzung eine Sackgasse. */
   .koop .sponsor-logos a{ display:inline-block; border-radius:4px; }
   .koop .sponsor-logos a:focus-visible{ outline:2px solid var(--brand); outline-offset:3px; }
-  .sponsor-fuss{ margin:0; font-size:11px; line-height:1.35; color:var(--ink-faint); }
+
+  /* ---------- Ideelle Foerderung ----------
+     Die dritte Art (seit 24.11.2026). Ein ideeller Foerderer traegt Betrieb
+     und Hosting NICHT mit. Deshalb ein eigener Wortlaut und eine eigene
+     Linkkennzeichnung, nicht bloss eine andere Ueberschrift: Wer ihn in eine
+     der beiden bezahlten Arten setzte, liesse das Portal eine Geldleistung
+     behaupten, die es nicht gibt.
+     64 statt 42 Pixel, dafuer schmaler begrenzt. Die beiden aelteren Groessen
+     gehen von einem querformatigen Schriftzug aus. Ein quadratisches Logo
+     (Bildmarke ueber Schriftzug) wird bei 42 Pixeln Hoehe nur 39 Pixel breit,
+     und der Schriftzug darin ist dann nicht mehr zu lesen. */
+  .ideell .sponsor-logos img{ height:64px; max-width:170px; }
+
+  /* Mehrere Arten untereinander: Jede bekommt ihre eigene Zeile mit ihrer
+     eigenen Anrede. Seit dem 24.11.2026 ist das der Regelfall und nicht die
+     Ausnahme - ein Hub kann einen ideellen Foerderer UND einen zahlenden
+     Partner haben. Beide unter eine Anrede zu zwingen hiesse, eine der
+     beiden Zusagen falsch wiederzugeben. */
+  .sponsor-gruppe + .sponsor-gruppe{ margin-top:15px; }
+  .sponsor-fuss{ margin:0; font-size:13px; line-height:1.35; color:var(--ink-faint); }
+  /* Nur die Zeile NEBEN dem Logo, nicht der Absatz der Medienkooperation
+     darunter - der braucht seine 62 Zeichen. Ohne diese Grenze zieht die
+     laengste Zeile die ganze Textspalte auf und schiebt das Logo nach
+     rechts weg: gemessen 349 statt 183 Pixel. Umbrochen steht der Text
+     vollstaendig da und das Logo dicht an der Anrede.
+     15 em sind nachgemessen: Bei 14 em werden es drei Zeilen, ab 14,5 em
+     zwei. Die Kippkante selbst zu nehmen hiesse, sie bei einem anderen
+     Schriftschnitt wieder zu reissen. */
+  .sponsor-text .sponsor-fuss{ max-width:15em; }
   /* Wie beim MVF-Logo: im Dark Mode nicht umfaerben, sondern auf eine weisse
      Flaeche stellen. Ein filter:invert wuerde jede Hausfarbe zerstoeren -
      und ein Sponsor hat ein Anrecht auf sein Logo, nicht auf ein Negativ. */
@@ -1915,6 +1949,7 @@
           <div class="hints-sponsor">
             <p id="sponsorText" hidden><b>Sponsoren.</b> Unsere Sponsoren ermöglichen mit ihrer finanziellen Unterstützung den Betrieb und das Hosting dieses Services. Sie nehmen dabei keinerlei Einfluss auf Auswahl der Datenbanken, der Ergebnisse oder den dargestellten Inhalt.</p>
             <p id="koopText" hidden><b>Medienpartnerschaft.</b> Dieser Hub wird in einer Medienkooperation präsentiert. Der Medienpartner ermöglicht mit seiner finanziellen Unterstützung den Betrieb und das Hosting dieses Services. Er nimmt dabei keinerlei Einfluss auf Auswahl der Datenbanken, der Ergebnisse oder den dargestellten Inhalt.</p>
+            <p id="ideellText" hidden><b>Ideelle Förderung.</b> Dieser Hub wird ideell gefördert, also ohne finanzielle Beteiligung an Betrieb und Hosting. Der Förderer nimmt keinerlei Einfluss auf Auswahl der Datenbanken, der Ergebnisse oder den dargestellten Inhalt.</p>
           </div>
           <div class="meta-row">
             <span class="dot"></span>
@@ -1922,23 +1957,48 @@
           </div>
         </div>
 
-        <!-- Zwei Anreden, eine Flaeche: Welche erscheint, entscheidet die
-             Sponsorenliste weiter unten (art:"koop"). Beide stehen fertig hier,
-             damit der Wortlaut im Markup nachlesbar ist und nicht in einer
-             Zeichenkette im Skript steckt. -->
+        <!-- Drei Arten, drei Zeilen: Welche erscheint, entscheidet die
+             Sponsorenliste weiter unten (Feld art). Alle drei stehen fertig
+             hier, damit der Wortlaut im Markup nachlesbar ist und nicht in
+             einer Zeichenkette im Skript steckt.
+             Bis zum 24.11.2026 war es EINE Flaeche, die zwischen zwei Anreden
+             umschaltete. Das trug nur, solange ein Hub genau eine Art hatte.
+             Jetzt kann er zwei haben, und dann braucht jede ihre eigene. -->
         <div class="sponsor-block" id="sponsorFeld" hidden>
-          <div class="sponsor">
-            <span class="sponsor-text">
-              <span class="sponsor-vor" id="sponsorAnrede">Gesponsert<sup>*</sup> von:</span>
-              <span class="sponsor-fuss" id="sponsorStern"><sup>*</sup> ohne Einfluss auf die Inhalte zu nehmen</span>
-              <span class="sponsor-vor" id="koopAnrede" hidden>In einer Medienkooperation</span>
-              <span class="sponsor-vor sponsor-vor-stark" id="koopAnredeStark" hidden>präsentiert von</span>
-            </span>
-            <span class="sponsor-logos" id="sponsorLogos"></span>
+
+          <div class="sponsor-gruppe koop" id="gruppeKoop" hidden>
+            <div class="sponsor">
+              <span class="sponsor-text">
+                <span class="sponsor-vor">In einer Medienkooperation</span>
+                <span class="sponsor-vor sponsor-vor-stark">präsentiert von</span>
+              </span>
+              <span class="sponsor-logos" id="logosKoop"></span>
+            </div>
+            <p class="sponsor-fuss koop-fuss">Auswahl und Darstellung der Studien, der
+            Datenbanken und aller weiteren Inhalte erfolgen redaktionell unabhängig.
+            Der Medienpartner nimmt darauf keinen Einfluss.</p>
           </div>
-          <p class="sponsor-fuss koop-fuss" id="koopFuss" hidden>Auswahl und Darstellung der Studien, der
-          Datenbanken und aller weiteren Inhalte erfolgen redaktionell unabhängig.
-          Der Medienpartner nimmt darauf keinen Einfluss.</p>
+
+          <div class="sponsor-gruppe" id="gruppeSponsor" hidden>
+            <div class="sponsor">
+              <span class="sponsor-text">
+                <span class="sponsor-vor">Gesponsert<sup>*</sup> von:</span>
+                <span class="sponsor-fuss"><sup>*</sup> ohne Einfluss auf die Inhalte zu nehmen</span>
+              </span>
+              <span class="sponsor-logos" id="logosSponsor"></span>
+            </div>
+          </div>
+
+          <div class="sponsor-gruppe ideell" id="gruppeIdeell" hidden>
+            <div class="sponsor">
+              <span class="sponsor-text">
+                <span class="sponsor-vor">Ideeller Förderer<sup>*</sup> des Portals:</span>
+                <span class="sponsor-fuss"><sup>*</sup> ohne finanzielle Beteiligung und ohne Einfluss auf die Inhalte</span>
+              </span>
+              <span class="sponsor-logos" id="logosIdeell"></span>
+            </div>
+          </div>
+
         </div>
       </div>
       <!-- Band „Aktuell im Hub" (Entwurf Mariann Stegmaier, Hub-Seiten S. 3).
@@ -2374,36 +2434,74 @@ const CHIPS = [
 // === CHIPS-BLOCK-ENDE ===
 
 // === SPONSOR-BLOCK-START (themenspezifisch) ===
+// Unterstuetzer dieses Portals. Leer heisst: Das Feld erscheint nicht.
+// Je Eintrag: n = Name, logo = Pfad im Ordner logo/, u = Ziel des Verweises.
+// Dazu freiwillig:
+//   art:"koop"     Medienpartner - traegt Betrieb und Hosting mit.
+//   art:"ideell"   Ideeller Foerderer - zahlt NICHTS. Eigener Wortlaut, und
+//                  der Verweis traegt rel="nofollow" statt rel="sponsored".
+//   (ohne art)     Sponsor - traegt Betrieb und Hosting mit.
+//   seit:"JJJJ-MM-TT"  Der Eintrag erscheint erst ab diesem Tag.
+// Ein Hub kann einen ideellen Foerderer UND einen zahlenden Partner haben;
+// jede Art bekommt dann ihre eigene Zeile. Die Wortlaute stehen in
+// hub-scripts/sponsoren.py und im Markup der Seite, nicht hier.
 const SPONSOREN = [
+  // Retina plus e.V., Bonn. Markus Georg hat die Verwendung des Logos am
+  // 17.11.2026 ausdruecklich erlaubt und auf die Pressefotos-Seite verwiesen;
+  // die Datei ist das unveraenderte Original von dort. Ideell heisst: Der
+  // Verein traegt Betrieb und Hosting nicht mit (Peter, 24.11.2026).
+  {n:"Retina plus e.V.", logo:"logo/retina-plus.svg", u:"https://www.retinaplus.de/", art:"ideell"}
 ];
 // === SPONSOR-BLOCK-ENDE ===
 
 // Sponsorenfeld einblenden, sobald es etwas einzublenden gibt. Ohne Eintrag
-// bleibt beides verborgen; ein zusaetzlicher Schalter waere eine Stelle mehr,
+// bleibt alles verborgen; ein zusaetzlicher Schalter waere eine Stelle mehr,
 // an der jemand etwas vergessen kann.
 // Wie ueberall in dieser Datei wird ohne Maskierung eingesetzt (siehe CLAUDE.md):
 // Namen und Adressen werden von Hand gepflegt, spitze Klammern gehoeren nicht hinein.
+//
+// Je Art eine Zeile, in dieser Reihenfolge. rel="sponsored" ist die von
+// Suchmaschinen erwartete Kennzeichnung eines BEZAHLTEN Verweises; ohne sie
+// kann er als Linkkauf gewertet werden. Eine Medienkooperation ist ebenso
+// eine bezahlte Platzierung. Bei einer ideellen Foerderung fliesst dagegen
+// kein Geld - dort waere "sponsored" eine Falschangabe gegenueber der
+// Suchmaschine, und es gilt "nofollow".
+const SPONSOR_ARTEN = [
+  { art:'koop',    gruppe:'gruppeKoop',    logos:'logosKoop',    text:'koopText',    rel:'sponsored noopener' },
+  { art:'sponsor', gruppe:'gruppeSponsor', logos:'logosSponsor', text:'sponsorText', rel:'sponsored noopener' },
+  { art:'ideell',  gruppe:'gruppeIdeell',  logos:'logosIdeell',  text:'ideellText',  rel:'nofollow noopener'  }
+];
+
+// Ein Eintrag mit seit:"JJJJ-MM-TT" erscheint erst ab diesem Tag. Verglichen
+// wird als Zeichenkette, was bei diesem Format der Datumsvergleich ist - und
+// anders als Date.parse ohne Zeitzonenfalle.
+function sponsorLaeuft(s) {
+  if (!s.seit) return true;
+  var d = new Date();
+  var heute = d.getFullYear() + '-'
+    + String(d.getMonth() + 1).padStart(2, '0') + '-'
+    + String(d.getDate()).padStart(2, '0');
+  return heute >= s.seit;
+}
+
 if (Array.isArray(SPONSOREN) && SPONSOREN.length) {
-  document.getElementById('sponsorLogos').innerHTML = SPONSOREN.map(function (s) {
-    // rel="sponsored" ist die von Suchmaschinen erwartete Kennzeichnung eines
-    // bezahlten Verweises; ohne sie kann er als Linkkauf gewertet werden. Eine
-    // Medienkooperation ist ebenso eine bezahlte Platzierung - dieselbe
-    // Kennzeichnung, dieselbe Ehrlichkeit gegenueber der Suchmaschine.
-    return '<a href="' + s.u + '" target="_blank" rel="sponsored noopener" title="'
-      + s.n + '"><img src="' + s.logo + '" alt="' + s.n + '" loading="lazy"></a>';
-  }).join('');
-  document.getElementById('sponsorFeld').hidden = false;
-  // Die Anrede richtet sich nach der Liste: Sobald ein Eintrag als
-  // Medienkooperation gefuehrt wird, gilt deren Wortlaut fuer das ganze Feld -
-  // zwei Anreden nebeneinander waeren im selben Kasten nicht zu lesen.
-  var koop = SPONSOREN.some(function (s) { return s.art === 'koop'; });
-  ['koopAnrede', 'koopAnredeStark', 'koopFuss'].forEach(function (id) {
-    document.getElementById(id).hidden = !koop;
+  var etwasZuZeigen = false;
+  SPONSOR_ARTEN.forEach(function (a) {
+    // Ohne art ist ein Eintrag ein Sponsor - so stand es vor dem 24.11.2026
+    // in allen Portalen, und so soll es bleiben.
+    var liste = SPONSOREN.filter(function (s) {
+      return (s.art || 'sponsor') === a.art && sponsorLaeuft(s);
+    });
+    if (!liste.length) return;
+    etwasZuZeigen = true;
+    document.getElementById(a.logos).innerHTML = liste.map(function (s) {
+      return '<a href="' + s.u + '" target="_blank" rel="' + a.rel + '" title="'
+        + s.n + '"><img src="' + s.logo + '" alt="' + s.n + '" loading="lazy"></a>';
+    }).join('');
+    document.getElementById(a.gruppe).hidden = false;
+    document.getElementById(a.text).hidden = false;
   });
-  document.getElementById('sponsorAnrede').hidden = koop;
-  document.getElementById('sponsorStern').hidden = koop;
-  document.getElementById('sponsorFeld').classList.toggle('koop', koop);
-  document.getElementById(koop ? 'koopText' : 'sponsorText').hidden = false;
+  document.getElementById('sponsorFeld').hidden = !etwasZuZeigen;
 }
 
 function hostOf(u){ try{ return new URL(u).hostname.replace(/^www\./,''); }catch(e){ return ""; } }
