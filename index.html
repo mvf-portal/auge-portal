@@ -881,16 +881,22 @@
      zwei. Die Kippkante selbst zu nehmen hiesse, sie bei einem anderen
      Schriftschnitt wieder zu reissen. */
   .sponsor-text .sponsor-fuss{ max-width:15em; }
-  /* Wie beim MVF-Logo: im Dark Mode nicht umfaerben, sondern auf eine weisse
+  /* Wie beim MVF-Logo: im Dark Mode nicht umfaerben, sondern auf eine helle
      Flaeche stellen. Ein filter:invert wuerde jede Hausfarbe zerstoeren -
-     und ein Sponsor hat ein Anrecht auf sein Logo, nicht auf ein Negativ. */
+     und ein Sponsor hat ein Anrecht auf sein Logo, nicht auf ein Negativ.
+     Nicht REIN weiss: Wer den Dunkelmodus braucht, weil ihn Helligkeit
+     blendet, bekaeme sonst einen hellen Fleck mitten auf der Seite. Genau
+     dieser Fall steht hier an - der ideelle Foerderer des Augen-Hubs ist ein
+     Verein von Menschen mit Sehverlust, dessen Vorsitzender nur im
+     Dunkelmodus liest (Peter, 24.11.2026). Abgetoent bleibt das Logo lesbar
+     und blendet nicht. */
   @media (prefers-color-scheme:dark){
     :root:not([data-theme="light"]) .sponsor-logos img{
-      background:#fff; padding:3px 6px; border-radius:4px;
+      background:#DDE4EC; padding:4px 7px; border-radius:4px;
     }
   }
   :root[data-theme="dark"] .sponsor-logos img{
-    background:#fff; padding:3px 6px; border-radius:4px;
+    background:#DDE4EC; padding:4px 7px; border-radius:4px;
   }
 
   /* ---------- Rueckmeldung nach dem Absenden ---------- */
@@ -1471,6 +1477,15 @@
          Englisch: startseite_neu.NETZ_EN uebersetzt die Texte fuer /en/. -->
     <style>
       .dsw{ position:relative; margin-left:auto; display:flex; align-items:center; }
+      /* Die Lupe sitzt im selben Behaelter wie der Darstellungsschalter und
+         erbt dessen Knopfgestaltung. Ein eigener relativer Behaelter, damit
+         ihr Menue an ihr haengt und nicht am Nachbarn. */
+      .lupe{ position:relative; display:flex; align-items:center; margin-right:8px; }
+      .lupe .dsw-menue{ width:208px; }
+      .lupe-wert{ position:absolute; right:-2px; bottom:-3px; font-size:9px; font-weight:700;
+                  line-height:1; color:#C9D6F2; background:#14202E; border-radius:3px;
+                  padding:1px 2px; pointer-events:none; }
+      .lupe-knopf[data-stufe="100"] .lupe-wert{ display:none; }
       .dsw ~ .netz-rechts{ margin-left:14px; }  /* ~ statt +: dazwischen steht das <script> */
       .dsw-knopf{ width:34px; height:27px; border:1px solid #3A4A60; border-radius:6px; background:transparent;
                   display:flex; align-items:center; justify-content:center; cursor:pointer; padding:0; }
@@ -1500,6 +1515,21 @@
       @media print{ .dsw{ display:none !important; } }
     </style>
     <div class="dsw">
+      <div class="lupe">
+        <button class="dsw-knopf lupe-knopf" type="button" id="lupeKnopf" data-stufe="100"
+                aria-haspopup="menu" aria-expanded="false" aria-controls="lupeMenue"
+                title="Ansicht vergrößern" aria-label="Ansicht vergrößern, derzeit 100 Prozent">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="#C9D6F2" stroke-width="2"/><path d="M15.5 15.5 21 21M7.5 10.5h6M10.5 7.5v6" stroke="#C9D6F2" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="lupe-wert" aria-hidden="true">100</span>
+        </button>
+        <div class="dsw-menue" id="lupeMenue" role="menu" aria-label="Ansicht vergrößern" hidden>
+          <span class="dsw-titel">ANSICHT VERGRÖSSERN</span>
+          <button type="button" role="menuitemradio" data-zoom="100" aria-checked="true"><span>Normal (100 %)</span><i>✓</i></button>
+          <button type="button" role="menuitemradio" data-zoom="200" aria-checked="false"><span>Groß (200 %)</span><i>✓</i></button>
+          <button type="button" role="menuitemradio" data-zoom="400" aria-checked="false"><span>Sehr groß (400 %)</span><i>✓</i></button>
+          <span class="dsw-fuss">Vergrößert die ganze Seite, nicht nur die Schrift. Die Wahl gilt für alle Angebote. Bei 400 % muss auf schmalen Fenstern seitlich gescrollt werden.</span>
+        </div>
+      </div>
       <button class="dsw-knopf" type="button" id="dswKnopf" aria-haspopup="menu" aria-expanded="false" aria-controls="dswMenue"
               title="Darstellung" aria-label="Darstellung: hell, dunkel oder wie Ihr Gerät">
         <svg class="sonne" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="#F2B84B" stroke-width="2"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="#F2B84B" stroke-width="2" stroke-linecap="round"/></svg>
@@ -1552,6 +1582,68 @@
         schreiben(w); anwenden(w); zu(); knopf.focus();
       });
       document.addEventListener("click", function (e) { if (!menue.hidden && !e.target.closest(".dsw")) zu(); });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !menue.hidden) { zu(); knopf.focus(); } });
+    })();
+
+    // ---- Lupe -------------------------------------------------------------
+    // Vertrag wie beim Darstellungsschalter: Cookie "mvf-zoom" = 125|150|200|300,
+    // bei 100 geloescht (Max-Age=0); Domain=.m-vf.de, Path=/, ein Jahr,
+    // SameSite=Lax, Secure nur unter https. Kein localStorage - der gaelte nur
+    // je Subdomain, und die Wahl soll fuer alle Angebote der Reihe gelten.
+    // Der Datenschutztext dazu steht in recht_neu.py, Abschnitt 2, #darstellung.
+    (function () {
+      var knopf = document.getElementById("lupeKnopf"), menue = document.getElementById("lupeMenue");
+      if (!knopf || !menue) return;
+      // Zwei Stufen genuegen (Peter, 24.11.2026). Wer die Lupe braucht, soll nicht
+      // erst waehlen muessen, und sechs Eintraege sind fuer eine Hilfe gegen
+      // schlechtes Sehen selbst eine Huerde.
+      var STUFEN = ["100", "200", "400"];
+      function lesen() {
+        var m = document.cookie.match(/(?:^|;\s*)mvf-zoom=(\d+)/);
+        return (m && STUFEN.indexOf(m[1]) > -1) ? m[1] : "100";
+      }
+      function schreiben(w) {
+        var d = /(^|\.)m-vf\.de$/.test(location.hostname) ? "; Domain=.m-vf.de" : "";
+        var sicher = location.protocol === "https:" ? "; Secure" : "";
+        document.cookie = "mvf-zoom=" + (w === "100" ? "; Max-Age=0" : w + "; Max-Age=31536000")
+          + "; Path=/; SameSite=Lax" + d + sicher;
+      }
+      function anwenden(w) {
+        // zoom statt transform: Es wirkt auf die Pixelwerte dieser Seite UND
+        // verkleinert die Ansichtsbreite, die Seite bricht also um, statt den
+        // Leser quer scrollen zu lassen.
+        document.documentElement.style.zoom = (w === "100") ? "" : (parseInt(w, 10) / 100);
+        knopf.setAttribute("data-stufe", w);
+        knopf.setAttribute("aria-label", "Ansicht vergrößern, derzeit " + w + " Prozent");
+        var anzeige = knopf.querySelector(".lupe-wert");
+        if (anzeige) anzeige.textContent = w;
+        menue.querySelectorAll("[data-zoom]").forEach(function (b) {
+          b.setAttribute("aria-checked", b.getAttribute("data-zoom") === w ? "true" : "false");
+        });
+      }
+      function zu() { menue.hidden = true; knopf.setAttribute("aria-expanded", "false"); }
+      anwenden(lesen());
+      knopf.addEventListener("click", function (e) {
+        e.stopPropagation();
+        // Das Nachbarmenue zuklappen: Es liegt im selben Behaelter, der
+        // Aussenklick-Waechter dort greift also nicht.
+        var nachbar = document.getElementById("dswMenue");
+        if (nachbar && !nachbar.hidden) {
+          nachbar.hidden = true;
+          document.getElementById("dswKnopf").setAttribute("aria-expanded", "false");
+        }
+        var auf = menue.hidden;
+        menue.hidden = !auf;
+        knopf.setAttribute("aria-expanded", auf ? "true" : "false");
+        if (auf) { var b = menue.querySelector('[aria-checked="true"]'); if (b) b.focus(); }
+      });
+      menue.addEventListener("click", function (e) {
+        var b = e.target.closest("[data-zoom]");
+        if (!b) return;
+        var w = b.getAttribute("data-zoom");
+        schreiben(w); anwenden(w); zu(); knopf.focus();
+      });
+      document.addEventListener("click", function (e) { if (!menue.hidden && !e.target.closest(".lupe")) zu(); });
       document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !menue.hidden) { zu(); knopf.focus(); } });
     })();
     </script>
