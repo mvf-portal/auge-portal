@@ -1,29 +1,31 @@
 {
  "hub": "Knowledge-Hub Augenheilkunde",
  "domain": "auge.m-vf.de",
- "datum": "2026-11-25",
- "stand": "terminiert",
- "titel": "MVF Augenheilkunde-Newsletter 25.11.2026",
- "betreff": "Neueste Studien - Augenheilkunde – 25. November 2026",
+ "datum": "2026-11-26",
+ "stand": "gestoppt",
+ "titel": "MVF Augenheilkunde-Newsletter 26.11.2026",
+ "betreff": "Neueste Studien - Augenheilkunde – 26. November 2026",
  "anzahl": 6,
  "pmids": [
-  "43076903",
-  "43073945",
-  "43073820",
-  "43072646",
-  "43072635",
-  "43072620"
+  "43082260",
+  "43082259",
+  "43081569",
+  "43080603",
+  "43080457",
+  "43005311"
  ],
- "kampagne": "https://us6.admin.mailchimp.com/campaigns/edit?id=9100143",
- "termin_utc": "2026-11-25T09:00:00+00:00",
- "empfaenger": 1,
- "listengroesse": 5840,
- "beanstandungen": [],
+ "kampagne": "https://us6.admin.mailchimp.com/campaigns/edit?id=9100167",
+ "termin_utc": null,
+ "empfaenger": 0,
+ "listengroesse": 5838,
+ "beanstandungen": [
+  "das Empfaengersegment ist leer - niemand wuerde die Ausgabe bekommen"
+ ],
  "aussortiert": [],
  "pool": {
   "geholt": 220,
   "bekannt": 53,
-  "pool": 53,
+  "pool": 52,
   "gewaehlt": 6,
   "neu": 6
  },
