@@ -2412,18 +2412,9 @@ const DB = [
 
 // Momentaufnahme neuester Studien (PubMed, nach Datum sortiert) — deutsche Zusammenfassungen
 // === STUDIES-BLOCK-START (taeglich 06:00 Uhr von GitHub Actions ersetzt) ===
-const SNAP_DATE = "28. Nov. 2026, 05:01 Uhr";
+const SNAP_DATE = "28. Nov. 2026, 05:26 Uhr";
 const SNAP_STATUS = "neu";
 const STUDIES = [
-  {
-    journal:"Am J Ophthalmol", year:"2026", pmid:"43098452",
-    author:"Jiang M et al.", pubdate:"26.11.2026",
-    added:"26.11.2026",
-    title:"Nystagmus als Hauptfaktor für schlechte Lebensqualität nach Katarakt-OP im Kindesalter",
-    sum:"Querschnittstudie von 201 Kindern nach angeborener Kataraktoperation und 116 gesunden Kindern zur Bewertung funktioneller Sehfähigkeit und augenbezogener Lebensqualität mittels PedEyeQ-Fragebogen.",
-    result:"Kinder nach Katarakt-OP zeigten signifikant niedrigere PedEyeQ-Scores als gesunde in allen Bereichen (p &lt; 0,001). Nystagmus sagte unabhängig schlechte funktionelle Sehfähigkeit voraus (adj. Coeff: -11,04, 95%-KI -20,36 bis -1,72, p = 0,022); höheres Alter, ländlicher Wohnort und Nystagmus waren mit schwerem Ausmaß an Lebensqualität-Beeinträchtigung assoziiert (OR 10,74–1,82, p ≤ 0,027).",
-    transfer:"China, aber befund- und fragebogenbasiert, teilweise übertragbar auf Deutschland"
-  },
   {
     journal:"Front Endocrinol (Lausanne)", year:"2026", pmid:"43100930",
     author:"Robinson EJS et al.", pubdate:"12.11.2026",
@@ -2434,13 +2425,13 @@ const STUDIES = [
     transfer:"UK/Deutschland, europäische Zentren, vergleichbare Versorgungsstrukturen und Dokumentationspflichten"
   },
   {
-    journal:"BMC Ophthalmol", year:"2026", pmid:"43099494",
-    author:"Dogan C et al.", pubdate:"04.09.2026",
+    journal:"Int J Retina Vitreous", year:"2026", pmid:"43099752",
+    author:"Pourazizi M et al.", pubdate:"03.09.2026",
     added:"27.11.2026",
-    title:"Tränenfilminstabilität persistiert nach VKC-Rückgang",
-    sum:"Vergleich von 21 Patienten mit inaktiver vernaler Keratokonjunktivitis und 21 gesunden Kontrollen zur Frage, ob Augenoberflächen-Störungen nach klinischer Remission bestehen bleiben.",
-    result:"TBUT (Tränenfilm-Aufreißzeit) war in der VKC-Gruppe signifikant niedriger als in Kontrollen (Median 7,5 s vs. 10,0 s, p = 0,003); Schirmer-Test, Tränenosmolarität und Hornhautsensitivität unterschieden sich nicht signifikant. Sowohl limbale als auch palpebrale VKC zeigten niedriges TBUT (p = 0,037 bzw. p = 0,049).",
-    transfer:"Türkei, klinische Praxis, beschreibende Erkenntnisse bei kleiner Fallzahl"
+    title:"Niedriges Vitamin D mit erhöhtem ROP-Risiko assoziiert",
+    sum:"Systematische Übersichtsarbeit und Metaanalyse von zehn beobachtenden Studien zum Zusammenhang zwischen Serum-Vitamin-D und Retinopathia praematurorum bei Früh­geborenen.",
+    result:"Sechs Studien (281 ROP-Neugeborene) zeigten signifikant niedrigere Vitamin-D-Spiegel bei ROP gegenüber Kontrollen (SMD -0,94, 95%-KI -1,21 bis -0,67, p &lt; 0,001). Vitamin-D-Mangel war mit erhöhtem ROP-Risiko assoziiert (OR 6,69, 95%-KI 1,65–27,4, p = 0,01). Behandelungsbedürftige ROP zeigte niedrigere Vitamin-D-Werte als nur überwachte Fälle.",
+    transfer:"Internationale Daten, offene Frage zur therapeutischen Relevanz, prospektive Studien notwendig"
   },
   {
     journal:"BMC Ophthalmol", year:"2026", pmid:"43099498",
@@ -2452,13 +2443,31 @@ const STUDIES = [
     transfer:"Japan, beschreibende Daten, begrenzte Fallzahl unter 400 g, Hypothesengenerierung"
   },
   {
-    journal:"Int J Retina Vitreous", year:"2026", pmid:"43099752",
-    author:"Pourazizi M et al.", pubdate:"03.09.2026",
+    journal:"BMC Ophthalmol", year:"2026", pmid:"43099494",
+    author:"Dogan C et al.", pubdate:"04.09.2026",
     added:"27.11.2026",
-    title:"Niedriges Vitamin D mit erhöhtem ROP-Risiko assoziiert",
-    sum:"Systematische Übersichtsarbeit und Metaanalyse von zehn beobachtenden Studien zum Zusammenhang zwischen Serum-Vitamin-D und Retinopathia praematurorum bei Früh­geborenen.",
-    result:"Sechs Studien (281 ROP-Neugeborene) zeigten signifikant niedrigere Vitamin-D-Spiegel bei ROP gegenüber Kontrollen (SMD -0,94, 95%-KI -1,21 bis -0,67, p &lt; 0,001). Vitamin-D-Mangel war mit erhöhtem ROP-Risiko assoziiert (OR 6,69, 95%-KI 1,65–27,4, p = 0,01). Behandelungsbedürftige ROP zeigte niedrigere Vitamin-D-Werte als nur überwachte Fälle.",
-    transfer:"Internationale Daten, offene Frage zur therapeutischen Relevanz, prospektive Studien notwendig"
+    title:"Tränenfilminstabilität persistiert nach VKC-Rückgang",
+    sum:"Vergleich von 21 Patienten mit inaktiver vernaler Keratokonjunktivitis und 21 gesunden Kontrollen zur Frage, ob Augenoberflächen-Störungen nach klinischer Remission bestehen bleiben.",
+    result:"TBUT (Tränenfilm-Aufreißzeit) war in der VKC-Gruppe signifikant niedriger als in Kontrollen (Median 7,5 s vs. 10,0 s, p = 0,003); Schirmer-Test, Tränenosmolarität und Hornhautsensitivität unterschieden sich nicht signifikant. Sowohl limbale als auch palpebrale VKC zeigten niedriges TBUT (p = 0,037 bzw. p = 0,049).",
+    transfer:"Türkei, klinische Praxis, beschreibende Erkenntnisse bei kleiner Fallzahl"
+  },
+  {
+    journal:"Am J Ophthalmol", year:"2026", pmid:"43098452",
+    author:"Jiang M et al.", pubdate:"26.11.2026",
+    added:"26.11.2026",
+    title:"Nystagmus als Hauptfaktor für schlechte Lebensqualität nach Katarakt-OP im Kindesalter",
+    sum:"Querschnittstudie von 201 Kindern nach angeborener Kataraktoperation und 116 gesunden Kindern zur Bewertung funktioneller Sehfähigkeit und augenbezogener Lebensqualität mittels PedEyeQ-Fragebogen.",
+    result:"Kinder nach Katarakt-OP zeigten signifikant niedrigere PedEyeQ-Scores als gesunde in allen Bereichen (p &lt; 0,001). Nystagmus sagte unabhängig schlechte funktionelle Sehfähigkeit voraus (adj. Coeff: -11,04, 95%-KI -20,36 bis -1,72, p = 0,022); höheres Alter, ländlicher Wohnort und Nystagmus waren mit schwerem Ausmaß an Lebensqualität-Beeinträchtigung assoziiert (OR 10,74–1,82, p ≤ 0,027).",
+    transfer:"China, aber befund- und fragebogenbasiert, teilweise übertragbar auf Deutschland"
+  },
+  {
+    journal:"Graefes Arch Clin Exp Ophthalmol", year:"2026", pmid:"43102586",
+    author:"Zhang X et al.", pubdate:"27.11.2026",
+    added:"27.11.2026",
+    title:"Myopie-Beginn reduziert Lebensqualität bei Schülern deutlich",
+    sum:"Kohortenstudie bei 821 chinesischen Schülern zur Assoziation zwischen Myopiebeginn und gesundheitsbezogener Lebensqualität über 3 Jahre gemessen mit dem PedsQL 4.0 SF15.",
+    result:"Myopische Schüler zeigten signifikant niedrigere Gesamtwerte und Dimensionswerte der Lebensqualität als emmetrope Peers (p&lt;0,01). Im Jahr des Myopibeginns sanken die Werte deutlich ab. HRQoL-Scores verschlechterten sich über alle Grade 7–9, außer soziale Funktionsfähigkeit (p&lt;0,05). Myopiestatus, Geschlecht und elterliche Bildung waren unabhängig assoziiert; Sphärisches Äquivalent zeigte nichtlineare Beziehung zur Lebensqualität.",
+    transfer:"China, bevölkerungsbezogene Langzeitdaten; Frage zur Lebensqualität übertragbar auf deutsches Setting"
   },
 ];
 // === STUDIES-BLOCK-ENDE ===
@@ -2473,7 +2482,7 @@ const RADAR_FRISTEN = [["2026-12-31"], ["2027-01-20"], ["2027-01-07", "2027-02-1
 // === RADAR-BLOCK-ENDE ===
 
 // === ZULASSUNG-BLOCK-START (taeglich von GitHub Actions ersetzt) ===
-const ZUL_STAND = "27.11.2026";
+const ZUL_STAND = "28.11.2026";
 const ZUL_EIGENE = 0;
 const ZUL_GUTACHTEN = 0;
 const ZUL_ZULASSUNG = 0;
